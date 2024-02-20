@@ -10,21 +10,59 @@ datasource db {
 model User {
   id       String     @id @default(uuid())
   name     String
+  role     String
   username String     @unique
   email    String     @unique
   password String
   business Business[]
+  coffeeshops CoffeeShop[]
 }
-
+enum Role {
+  EMPRENDEDOR
+  BUSINESS
+}
 model Business {
   id             String   @id @default(uuid())
   code           String   @unique
   name           String
   category       String
-  local_location String
+  //schedule     String[]
+  frecuently_location String
   location       String
   images         String[]
-  contact        String   @db.Text
+  contact        Contact[]   @db.Text
+  Rating         Int
   ownerId        String
   owner          User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+}
+model CoffeeShop {
+    id             String   @id @default(uuid())
+    name           String
+    local_location String
+    location       String
+    menu           Product[]
+    images         String[]
+    traffic        TrafficLevel
+    contact        Contact[]
+    rating         Int
+    ownerId        String
+    owner          User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+}
+model Product {
+    id            String   @id @default(uuid())
+    Images String  
+    price      Float    
+    name          String
+    description   String
+    avalible      Boolean
+}
+enum TrafficLevel {
+  EMPTY // GRIS
+  BALANCED // AMARILLO
+  CROWDED // ROJO
+}
+model Contact {
+  id String @id @default(uuid())
+  type String
+  link String
 }
