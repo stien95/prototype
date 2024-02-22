@@ -4,6 +4,7 @@ import {
   IoMdPersonAdd,
   IoMdLogIn,
   IoIosAlbums,
+  IoMdAdd,
 } from "react-icons/io";
 import HeaderLink from "./HeaderLink";
 import HeaderInput from "./HeaderInput";
@@ -18,16 +19,10 @@ export default function Header() {
     {
       // <a href={href}>{children}</a> -- El icono aparece en el menu móvil
       // El Id es necesario para la key al mapear la lista
-      id: "login",
-      href: "/auth?p=login",
-      icon: <IoMdLogIn />,
-      children: "Iniciar sesión",
-    },
-    {
-      id: "register",
-      href: "/auth?p=register",
-      icon: <IoMdPersonAdd />,
-      children: "Registrarse",
+      id: "createBusiness",
+      href: "/create",
+      icon: <IoMdAdd />,
+      children: "Añade tu negocio",
     },
     {
       id: "categories",
@@ -49,8 +44,9 @@ export default function Header() {
         </Link>
         <HeaderInput />
         <nav className="flex gap-2 max-md:hidden">
-          {headerLinks.map(({ href, id, children }) => (
+          {headerLinks.map(({ href, id, children, icon }) => (
             <HeaderLink href={href} key={id}>
+              <span>{icon}</span>
               {children}
             </HeaderLink>
           ))}

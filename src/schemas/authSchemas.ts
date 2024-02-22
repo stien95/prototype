@@ -9,7 +9,7 @@ const password = z
   .min(7, errorLength("Password", 7, "min"))
   .max(120, errorLength("Password", 120, "max"));
 
-export const signInSchema = z.object({
+export const loginSchema = z.object({
   userOrEmail: z
     .string()
     .min(3, errorLength("Email or username", 3, "min"))
@@ -29,7 +29,7 @@ export const signInSchema = z.object({
   password,
 });
 
-export const signUpSchema = z
+export const registerSchema = z
   .object({
     name: z
       .string()

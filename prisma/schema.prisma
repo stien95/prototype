@@ -8,61 +8,75 @@ datasource db {
 }
 
 model User {
-  id       String     @id @default(uuid())
-  name     String
-  role     String
-  username String     @unique
-  email    String     @unique
-  password String
-  business Business[]
+  id          String       @id @default(uuid())
+  name        String
+  role        Role         @default(ENTREPRENEUR)
+  username    String       @unique
+  email       String       @unique
+  password    String
+  business    Business[]
   coffeeshops CoffeeShop[]
 }
+
 enum Role {
-  EMPRENDEDOR
+  ADMIN
+  ENTREPRENEUR
   BUSINESS
 }
+
 model Business {
-  id             String   @id @default(uuid())
-  code           String   @unique
-  name           String
-  category       String
-  //schedule     String[]
+  id                  String    @id @default(uuid())
+  code                String    @unique
+  name                String
+  category            String
+  schedule            String[]
   frecuently_location String
-  location       String
-  images         String[]
-  contact        Contact[]   @db.Text
-  Rating         Int
-  ownerId        String
-  owner          User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  location            String
+  images              String[]
+  contact             Contact[]
+  Rating              Int
+  ownerId             String
+  owner               User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 }
+
 model CoffeeShop {
-    id             String   @id @default(uuid())
-    name           String
-    local_location String
-    location       String
-    menu           Product[]
-    images         String[]
-    traffic        TrafficLevel
-    contact        Contact[]
-    rating         Int
-    ownerId        String
-    owner          User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  id             String       @id @default(uuid())
+  name           String
+  local_location String
+  location       String
+  menu           Product[]
+  images         String[]
+  traffic        TrafficLevel
+  contact        Contact[]
+  rating         Int
+  ownerId        String
+  owner          User         @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 }
+
 model Product {
-    id            String   @id @default(uuid())
-    Images String  
-    price      Float    
-    name          String
-    description   String
-    avalible      Boolean
+  id           String     @id @default(uuid())
+  Images       String
+  price        Float
+  name         String
+  description  String
+  avalible     Boolean
+  coffeeShopId String
+  coffeeShop   CoffeeShop @relation(fields: [coffeeShopId], references: [id], onDelete: Cascade)
 }
+
 enum TrafficLevel {
-  EMPTY // GRIS
-  BALANCED // AMARILLO
-  CROWDED // ROJO
+  EMPTY
+  BALANCED
+  CROWDED
 }
+
 model Contact {
-  id String @id @default(uuid())
+  id   String @id @default(uuid())
   type String
   link String
+
+  businessId   String?
+  Business     Business?   @relation(fields: [businessId], references: [id])
+  coffeeShopId String?
+  CoffeeShop   CoffeeShop? @relation(fields: [coffeeShopId], references: [id])
 }

@@ -69,6 +69,7 @@ export const authOptions: AuthOptions = {
           ...token,
           id: user.id,
           username: user.username,
+          role: user.role,
         };
       }
       return token;
@@ -80,6 +81,7 @@ export const authOptions: AuthOptions = {
           ...session.user,
           id: token.id,
           username: token.username,
+          role: token.role,
         },
       };
     },

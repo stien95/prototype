@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import prisma from "@/libs/db";
-import { signUpSchema } from "@/schemas/authSchemas";
+import { registerSchema } from "@/schemas/authSchemas";
 import { ZodError } from "zod";
-
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { username, email, password, name } = signUpSchema.parse(body);
+    const { username, email, password, name } = registerSchema.parse(body);
     if (!username || !email || !password) {
       return new NextResponse("Missing information", {
         status: 400,
