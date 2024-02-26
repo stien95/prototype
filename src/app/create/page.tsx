@@ -16,7 +16,7 @@ export default async function CreatePage() {
         <h2 className="text-gray-700 text-4xl my-2 font-black">
           ¿Qué quieres añadir?
         </h2>
-        <div className="flex w-full justify-around">
+        <div className="flex w-full justify-around text-gray-700">
         <Link href="create/business" className="text-3xl flex flex-col border-2 border-gray-600 rounded-md items-center p-4 transition-colors hover:bg-black/5">
           Un Negocio <MdAddBusiness  className="w-32 h-32 text-gray-700"/>
         </Link>

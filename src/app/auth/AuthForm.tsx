@@ -23,7 +23,7 @@ export default function AuthForm({ isRegister }: { isRegister: boolean }) {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting: isLoading, errors },
+    formState: { isLoading, errors },
   } = useForm<Record<string, string>>({
     resolver: zodResolver(isRegister ? registerSchema : loginSchema),
   });
@@ -106,7 +106,8 @@ export default function AuthForm({ isRegister }: { isRegister: boolean }) {
             {...register("confirmPassword")}
           />
         )}
-        <button className="bg-blue-500 text-white p-2 text-xl">
+        <button className="bg-blue-500 text-white p-2 text-xl 
+        disabled:opacity-50 disabled:after:h-4/5 disabled:after:aspect-square disabled:after:border-gray-50 disabled:after:border-4 disabled:after:rounded-full disabled:after:absolute relative flex items-center justify-center disabled:after:left-5 disabled:after:border-r-gray-400 disabled:after:animate-spin" disabled={isLoading}>
           {isRegister ? "Registrarse" : "Iniciar sesión"}
         </button>
       </form>

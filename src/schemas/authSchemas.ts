@@ -36,10 +36,7 @@ export const registerSchema = z
       .trim()
       .min(3, errorLength("Name", 3, "min"))
       .max(30, errorLength("Name", 30, "max"))
-      .regex(
-        nameRegex,
-        "Name can only contain letters, numbers, underscores, hyphens, and dots"
-      ),
+      .regex(nameRegex, "El nombre solo puede tener letras y espacios."),
     username: z
       .string()
       .trim()
@@ -47,7 +44,7 @@ export const registerSchema = z
       .max(30, errorLength("Username", 30, "max"))
       .regex(
         userRegex,
-        "Username can only contain letters, numbers, underscores, hyphens, and dots"
+        "El usuario solo puede tener letras, números, guiones bajos, guiones y puntos."
       ),
     email: z.string().trim().email().max(120, errorLength("Email", 120, "max")),
     password,
@@ -57,6 +54,6 @@ export const registerSchema = z
       .max(120, errorLength("Confirm password", 120, "max")),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords must match",
+    message: "Las contraseñas deben coincidir",
     path: ["confirmPassword"],
   });

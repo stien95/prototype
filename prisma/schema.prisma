@@ -16,6 +16,7 @@ model User {
   password    String
   business    Business[]
   coffeeshops CoffeeShop[]
+  rating      Rating[]
 }
 
 enum Role {
@@ -24,19 +25,36 @@ enum Role {
   BUSINESS
 }
 
+model Rating {
+  id         String   @id @default(uuid())
+  rating     Int
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  businessId String
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+}
+
 model Business {
-  id                  String    @id @default(uuid())
-  code                String    @unique
-  name                String
-  category            String
-  schedule            String[]
-  frecuently_location String
-  location            String
-  images              String[]
-  contact             Contact[]
-  Rating              Int
-  ownerId             String
-  owner               User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  id               String     @id @default(uuid())
+  name             String
+  category         String
+  schedule         Schedule[]
+  frequentLocation String
+  location         String
+  images           String[]
+  contact          Contact[]
+  Rating           Rating[]
+  ownerId          String
+  owner            User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+}
+
+model Schedule {
+  id         String   @id @default(uuid())
+  day        String
+  from       String
+  to         String
+  businessId String
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
 }
 
 model CoffeeShop {
