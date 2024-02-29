@@ -12,25 +12,10 @@ export default function HeaderInput() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<string[]>([]);
   const [isInputFocused, setIsInputFocused] = useState(false);
-  const handleSuggest = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const suggestionList = [
-      "Resultado 1",
-      "Texto de ejemplo",
-      "Test",
-      "Ejemplo 2",
-      "Lista de búsqueda",
-    ];
+  const queryHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setQuery(value);
-    if (value.trim() !== "") {
-      const filteredSuggestions = suggestionList.filter((suggestion) =>
-        suggestion.toLowerCase().includes(value.toLowerCase())
-      );
-      setResults(filteredSuggestions);
-    } else {
-      setResults([]);
-    }
-  };
+  }
   const handleSearch = () => {
     if (query.trim() !== "") {
       router.push(`/search?q=${query}`);
@@ -70,24 +55,14 @@ export default function HeaderInput() {
           placeholder="Buscar"
           className="outline-none px-2 bg-blue-500 placeholder-slate-50 flex-1"
           value={query}
-          onChange={(e) => handleSuggest(e)}
-          onFocus={() => setIsInputFocused(true)}
-          onBlur={() => setIsInputFocused(false)}
+          onChange={(e) => queryHandler(e)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
         />
       </div>
-
-      {results.length > 0 && (
-        <div className="text-gray-800 absolute bg-white border border-t-0 border-gray-200 w-full rounded-b-xl flex flex-col overflow-auto">
-          {results.map((result) => (
-            <span
-              key={result}
-              className="border-b border-gray-200 p-2 hover:bg-black/5 cursor-pointer"
-            >
-              {result}
-            </span>
-          ))}
-        </div>
-      )}
     </div>
   );
 }

@@ -32,7 +32,7 @@ export default function LinkPage({ searchParams }: Props) {
   if (searchParams.type === "instagram") {
     const link = searchParams.url.startsWith("https://www.instagram.com/")
       ? searchParams.url
-      : `https://www.instagram.com/${searchParams.url}`;
+      : `https://www.instagram.com/${searchParams.url.replace("@", "")}`;
     return redirect(link);
   }
   if (searchParams.type === "telegram") {
