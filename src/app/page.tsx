@@ -1,7 +1,5 @@
 import BusinessItem from "@/components/BusinessItem";
 import prisma from "@/libs/db";
-import Image from "next/image";
-import Link from "next/link";
 export default async function Home() {
   const business = await prisma.business.findMany({
     take: 4

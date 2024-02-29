@@ -14,9 +14,9 @@ export default function BusinessItem({ business }: Props) {
       <Image
         alt={`Image 1`}
         src={business.images[0] ?? "/no-image.svg"}
-        className="w-[300px] h-[300px] object-cover rounded-lg"
-        width={300}
-        height={300}
+        className="w-[544px] h-[306px] object-cover rounded-lg"
+        width={544}
+        height={306}
       />
       <div className="border flex flex-col border-gray-700 p-2 w-full mt-2">
         <span className="text-xl font-bold ">{business.name}</span>

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { K2D } from "next/font/google";
 import "./globals.css";
 import Layout from "@/components/Layout";
 import clsx from "clsx";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = K2D({subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "700", "800"]});
 
 export const metadata: Metadata = {
   title: "My Stand",
