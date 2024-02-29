@@ -19,6 +19,7 @@ export default function HeaderLink({
           ? "border-b border-gray-200 text-lg"
           : "border-b-4 border-transparent hover:border-emerald-400"
       )}
+      onClick={onClose()}
     >
       {children}
     </Link>
