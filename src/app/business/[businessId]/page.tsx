@@ -43,14 +43,14 @@ export default async function BusinessIdPage({ params }: Props) {
         <ul>
           <h3 className="text-2xl text-gray-700 font-bold">Contacto</h3>
           {business.contact.map(element => (
-            <ContactItem contact={element} />
+            <ContactItem contact={element} key={element.id} />
           ))}
         </ul>
         <DividingLine className="my-2" />
         <ul>
           <h3 className="text-2xl text-gray-700 font-bold">Horario</h3>
           {business.schedule.map(element => (
-            <li>
+            <li key={element.id}>
               <span>{days[element.day as keyof typeof days]}: </span>
               <span>{element.from}</span>
               -
