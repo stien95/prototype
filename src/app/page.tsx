@@ -12,7 +12,6 @@ export default async function Home() {
           <BusinessItem business={element} key={element.id}/>
         ))}
       </div>
-
     </main>
   );
 }

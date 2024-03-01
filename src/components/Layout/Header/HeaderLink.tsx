@@ -5,10 +5,12 @@ export default function HeaderLink({
   href,
   children,
   isMobile,
+  onClose,
 }: {
   href: string;
   children: React.ReactNode;
   isMobile?: boolean;
+  onClose?: () => void;
 }) {
   return (
     <Link
@@ -19,7 +21,7 @@ export default function HeaderLink({
           ? "border-b border-gray-200 text-lg"
           : "border-b-4 border-transparent hover:border-emerald-400"
       )}
-      onClick={onClose()}
+      onClick={onClose}
     >
       {children}
     </Link>

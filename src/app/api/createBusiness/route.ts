@@ -3,9 +3,8 @@ import { Contact, RealLocation, Schedule } from "@/store/useCreateBusiness";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
-import { authOptions } from "../auth/[...nextauth]/route";
 import prisma from "@/libs/db";
-import ContactSection from "@/app/create/business/ContactSection";
+import { authOptions } from "@/utils/authOptions";
 interface AdditionalData {
   images: string[];
   schedule: Schedule[];

@@ -61,7 +61,7 @@ export default function Header() {
       {isMobileMenu && (
         <menu className="flex flex-col flex-1 w-full h-full absolute bg-white">
           {headerLinks.map(({ href, id, children, icon }) => (
-            <HeaderLink href={href} key={id} isMobile>
+            <HeaderLink href={href} key={id} isMobile onClose={() => setIsMobileMenu(false)}>
               <span className="text-2xl">{icon}</span>
 
               {children}

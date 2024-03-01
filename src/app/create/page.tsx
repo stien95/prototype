@@ -1,10 +1,10 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { MdAddBusiness } from "react-icons/md";
 import { FaCoffee } from "react-icons/fa";
 import Image from "next/image";
+import { authOptions } from "@/utils/authOptions";
 
 export default async function CreatePage() {
   const session = await getServerSession(authOptions);

@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import AuthForm from "./AuthForm";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
+import { authOptions } from "@/utils/authOptions";
 
 interface Props {
   searchParams?: {
