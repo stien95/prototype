@@ -17,12 +17,19 @@ export default async function SearchPage({ searchParams }: Props) {
         },
         {
           category: {
-            contains: searchParams.q,
-            mode: "insensitive",
+            some: {
+              name: {
+                contains: searchParams.q,
+                mode: "insensitive",
+              },
+            },
           },
         },
       ],
     },
+    include: {
+      category: true
+    }
   });
   return (
     <main className="w-full">

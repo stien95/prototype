@@ -29,11 +29,8 @@ export default function ContactItem({contact}: Props) {
     }
     return (
     <Link className={clsx(colors[contact.type as keyof typeof validTypes], "text-white p-2 rounded-md flex items-center gap-2")} href={`/link?type=${contact.type}&url=${contact.link}`}>
-        {icon[contact.type as keyof typeof validTypes]}
-        <span>
-        {contact.type}    
-        </span>      
-        <span >{contact.link}</span>
+        {icon[contact.type as keyof typeof validTypes]}     
+        <span>{contact.link}</span>
     </Link>
   )
 }

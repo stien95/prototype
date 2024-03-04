@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createBusinessSchema } from "@/schemas/createBusinessSchema";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Textarea from "@/components/Textarea";
 
 export default function CreateBusinessForm() {
   const router = useRouter();
@@ -17,7 +18,7 @@ export default function CreateBusinessForm() {
   const {
     register,
     handleSubmit,
-    formState: { isLoading, errors,  },
+    formState: { isSubmitting: isLoading, errors,  },
   } = useForm<Record<string, string>>(
   {
     resolver: zodResolver(createBusinessSchema)
@@ -51,6 +52,13 @@ export default function CreateBusinessForm() {
         className="w-full"
         {...register("name")}
         errors={errors.name?.message}
+      />
+      <Textarea
+        placeholder="Descripción (opcional)"
+        className="w-full max-h-96"
+        {...register("description")}
+        errors={errors.description?.message}
+        maxLength={2000}
       />
       <Input
         placeholder="Categoría (Alimentos, cosméticos, accesorios...)"

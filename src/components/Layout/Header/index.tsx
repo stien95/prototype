@@ -40,7 +40,7 @@ export default function Header() {
     <>
       <header className="flex w-full text-white bg-blue-500 gap-2 justify-around items-center p-2">
         <Link href="/">
-        <h1 className="font-black text-2xl text-white">Prototipo</h1>
+        <h1 className="font-black text-2xl text-white">MyStand</h1>
         </Link>
         <HeaderInput />
         <nav className="flex gap-2 max-md:hidden">

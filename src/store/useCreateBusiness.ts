@@ -22,6 +22,7 @@ interface CreateBusinessStore {
   images: string[];
   setImages: (images: string[]) => void;
   removeImage: (index: number) => void;
+  movingImage: (index: number, isUp?: boolean) => void;
 
   realLocation: RealLocation;
   setRealLocation: (realLocation: RealLocation) => void;
@@ -42,6 +43,23 @@ export const useCreateBusiness = create<CreateBusinessStore>((set) => ({
   setImages: (newImages) => set({ images: newImages }),
   removeImage: (index) =>
     set((state) => ({ images: state.images.filter((_, i) => i !== index) })),
+  movingImage: (index, isUp) =>
+    set((state) => {
+      const newImages = [...state.images];
+      if (isUp && index > 0) {
+        [newImages[index - 1], newImages[index]] = [
+          newImages[index],
+          newImages[index - 1],
+        ];
+      }
+      if (!isUp && index < newImages.length - 1) {
+        [newImages[index], newImages[index + 1]] = [
+          newImages[index + 1],
+          newImages[index],
+        ];
+      }
+      return { images: newImages };
+    }),
 
   realLocation: {
     longitude: null,

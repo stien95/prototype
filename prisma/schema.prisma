@@ -17,6 +17,9 @@ model User {
   business    Business[]
   coffeeshops CoffeeShop[]
   rating      Rating[]
+
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
 }
 
 enum Role {
@@ -32,12 +35,16 @@ model Rating {
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   businessId String
   business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
 }
 
 model Business {
   id               String     @id @default(uuid())
   name             String
-  category         String
+  description      String     @db.Text()
+  category         Category[]
   schedule         Schedule[]
   frequentLocation String
   location         String
@@ -46,6 +53,17 @@ model Business {
   Rating           Rating[]
   ownerId          String
   owner            User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+}
+
+model Category {
+  id          String     @id @default(uuid())
+  image       String?
+  name        String
+  description String?    @db.Text()
+  business    Business[]
 }
 
 model Schedule {
@@ -73,10 +91,10 @@ model CoffeeShop {
 
 model Product {
   id           String     @id @default(uuid())
-  Images       String
+  images       String[]
   price        Float
   name         String
-  description  String
+  description  String?    @db.Text()
   avalible     Boolean
   coffeeShopId String
   coffeeShop   CoffeeShop @relation(fields: [coffeeShopId], references: [id], onDelete: Cascade)

@@ -1,8 +1,10 @@
+import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from "next";
 import { K2D } from "next/font/google";
 import "./globals.css";
 import Layout from "@/components/Layout";
 import clsx from "clsx";
+import ModalProvider from "@/components/modals/ModalProvider";
 
 const inter = K2D({subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "700", "800"]});
 
@@ -22,6 +24,8 @@ export default function RootLayout({
         <Layout>
           {children}
         </Layout>
+        <ModalProvider/>
+        <Analytics/>
         </body>
     </html>
   );

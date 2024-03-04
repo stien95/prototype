@@ -23,7 +23,7 @@ export default function AuthForm({ isRegister }: { isRegister: boolean }) {
   const {
     register,
     handleSubmit,
-    formState: { isLoading, errors },
+    formState: { isSubmitting: isLoading, errors },
   } = useForm<Record<string, string>>({
     resolver: zodResolver(isRegister ? registerSchema : loginSchema),
   });

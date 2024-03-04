@@ -16,9 +16,12 @@ export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);
     const body = await req.json();
-    const { name, frequentLocation, category } = createBusinessSchema.parse(
-      body.data
-    );
+    const {
+      name,
+      frequentLocation,
+      category: categoryString,
+      description,
+    } = createBusinessSchema.parse(body.data);
     const { images, schedule, contacts, realLocation }: AdditionalData = body;
     const validContacts =
       !contacts.some((contact) => contact.link === "") &&
@@ -32,7 +35,7 @@ export async function POST(req: Request) {
     if (
       !name ||
       !frequentLocation ||
-      !category ||
+      !categoryString ||
       !validContacts ||
       !validLocation ||
       !validImages
@@ -46,10 +49,29 @@ export async function POST(req: Request) {
         status: 401,
       });
     }
-
+    let category = await prisma.category.findFirst({
+      where: {
+        name: {
+          equals: categoryString,
+          mode: "insensitive",
+        },
+      },
+    });
+    if (!category) {
+      category = await prisma.category.create({
+        data: {
+          name: categoryString,
+        },
+      });
+    }
     const business = await prisma.business.create({
       data: {
-        category,
+        category: {
+          connect: {
+            id: category.id,
+          },
+        },
+        description,
         frequentLocation,
         location: JSON.stringify(realLocation),
         name,
