@@ -20,6 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <meta name="google-site-verification" content="VDkTLGyyq1ggM2qtKbS_DRrC7LofDKcp4xfVa8kTAck" />
       <body className={clsx(inter.className, "h-screen")}>
         <Layout>
           {children}
